@@ -79,27 +79,19 @@ public class CursomcApplication implements CommandLineRunner{
 		Bairro bai2 = new Bairro(null,"PARQUE DAS LARANEJIRAS",cid1);
 		Bairro bai3 = new Bairro(null,"RECREIO DOS BAIDEIRANTES",cid1);
 		Bairro bai4 = new Bairro(null,"JARDIM IPYRANGA",cid1);
-
+		
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
 		cidadeRepository.saveAll(Arrays.asList(cid1,cid2,cid3,cid4));
 		
-		Cep cep1 = new Cep(null,1,1,9999,"U","38040-290");
-		Cep cep2 = new Cep(null,2,1,9999,"U","38061-080");
-		Cep cep3 = new Cep(null,3,1,500,"U","38046-674");
-		Cep cep4 = new Cep(null,3,501,9999,"U","38046-675");
+		Logradouro lograd1 = new Logradouro(null,"RUA","PEDRO BARBASSA",cid1);
+		Logradouro lograd2 = new Logradouro(null,"RUA","TRISTÃO DE CASTRO",cid1);
+		Logradouro lograd3 = new Logradouro(null,"AVENIDA","ANTONIO ALBERTO G. RESENDE",cid1);
 		
-		Logradouro lograd1 = new Logradouro(null,"RUA","PEDRO BARBASSA");
-		Logradouro lograd2 = new Logradouro(null,"RUA","TRISTÃO DE CASTRO");
-		Logradouro lograd3 = new Logradouro(null,"AVENIDA","ANTONIO ALBERTO G. RESENDE");
-
-		bai1.getLogradouros().addAll(Arrays.asList(lograd2));
-		bai2.getLogradouros().addAll(Arrays.asList(lograd3));
-		bai3.getLogradouros().addAll(Arrays.asList(lograd1));
-		bai4.getLogradouros().addAll(Arrays.asList(lograd2));
+		Cep cep1 = new Cep(null,1,9999,"U","38040-290",bai3,lograd1);
+		Cep cep2 = new Cep(null,1,9999,"U","38061-080",bai1,lograd2);
+		Cep cep3 = new Cep(null,1,500,"U","38046-674",bai2,lograd3);
+		Cep cep4 = new Cep(null,501,9999,"U","38046-675",bai4,lograd3);
 		
-		lograd2.getBairros().addAll(Arrays.asList(bai1));
-		lograd3.getBairros().addAll(Arrays.asList(bai2,bai4));
-		lograd1.getBairros().addAll(Arrays.asList(bai3));
 		
 		logradouroRepository.saveAll(Arrays.asList(lograd1,lograd2,lograd3));
 		bairroRepository.saveAll(Arrays.asList(bai1,bai2,bai3,bai4));

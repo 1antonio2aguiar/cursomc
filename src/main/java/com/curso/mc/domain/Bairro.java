@@ -32,17 +32,18 @@ public class Bairro implements Serializable{
 	private Integer id;
 	private String nome;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
 	
 	//@JsonBackReference -- funciona como o JsonIgnore
-	@JsonIgnore
+	/*@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "bairro_logradouro",
 	joinColumns = @JoinColumn(name = "bairro_id"),
 	inverseJoinColumns = @JoinColumn(name = "logradouro_id"))
-	private List<Logradouro> logradouros = new ArrayList<>();
+	private List<Logradouro> logradouros = new ArrayList<>();*/
 	
 	public Bairro() {
 	}
@@ -51,13 +52,6 @@ public class Bairro implements Serializable{
 		super();
 		this.id = id;
 		this.nome = nome;
-	}
-	
-	public Bairro(Integer id, String nome, Cidade cidade) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.cidade = cidade;
 	}
 	
 }

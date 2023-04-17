@@ -9,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,21 +31,23 @@ public class Logradouro implements Serializable{
 	private String tipoLogradouro;
 	private String nome;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
 	
 	//@JsonManagedReference -- funciona como o JsonIgnore
-	@ManyToMany(mappedBy = "logradouros")
-	private List<Bairro> bairros = new ArrayList<>();
+	@OneToMany(mappedBy = "logradouro")
+	private List<Cep> ceps = new ArrayList<>();
 	
 	public Logradouro() {}
 	
-	public Logradouro(Integer id, String tipoLogradouro, String nome) {
+	public Logradouro(Integer id, String tipoLogradouro, String nome, Cidade cidade) {
 		super();
 		this.id = id;
 		this.tipoLogradouro = tipoLogradouro;
 		this.nome = nome;
+		this.cidade = cidade;
 	}
 
 }

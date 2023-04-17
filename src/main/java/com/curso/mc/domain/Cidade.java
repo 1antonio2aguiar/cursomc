@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +32,7 @@ public class Cidade implements Serializable{
 	private Integer id;
 	private String nome;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "estado_id")
 	private Estado estado;
@@ -37,6 +40,9 @@ public class Cidade implements Serializable{
 	@OneToMany(mappedBy = "cidade")
 	private List<Bairro> bairros = new ArrayList<>();
 	//private Set<Bairro> bairros = new HashSet<>();
+	
+	@OneToMany(mappedBy = "cidade")
+	private List<Logradouro> logradouros = new ArrayList<>();
 	
 	public Cidade() {
 	}
