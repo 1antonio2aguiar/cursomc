@@ -1,5 +1,6 @@
 package com.curso.mc;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,18 @@ import com.curso.mc.domain.Bairro;
 import com.curso.mc.domain.Categoria;
 import com.curso.mc.domain.Cep;
 import com.curso.mc.domain.Cidade;
+import com.curso.mc.domain.Cliente;
 import com.curso.mc.domain.Estado;
 import com.curso.mc.domain.Logradouro;
 import com.curso.mc.domain.Produto;
+import com.curso.mc.domain.enums.TipoCliente;
+import com.curso.mc.domain.input.Endereco;
 import com.curso.mc.repositories.BairroRepository;
 import com.curso.mc.repositories.CategoriaRepository;
 import com.curso.mc.repositories.CepRepository;
 import com.curso.mc.repositories.CidadeRepository;
+import com.curso.mc.repositories.ClienteRepository;
+import com.curso.mc.repositories.EnderecoRepository;
 import com.curso.mc.repositories.EstadoRepository;
 import com.curso.mc.repositories.LogradouroRepository;
 import com.curso.mc.repositories.ProdutoRepository;
@@ -32,6 +38,8 @@ public class CursomcApplication implements CommandLineRunner{
 	@Autowired private BairroRepository bairroRepository;
 	@Autowired private LogradouroRepository logradouroRepository;
 	@Autowired private CepRepository cepRepository;
+	@Autowired private ClienteRepository clienteRepository;
+	@Autowired private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -96,6 +104,17 @@ public class CursomcApplication implements CommandLineRunner{
 		logradouroRepository.saveAll(Arrays.asList(lograd1,lograd2,lograd3));
 		bairroRepository.saveAll(Arrays.asList(bai1,bai2,bai3,bai4));
 		cepRepository.saveAll(Arrays.asList(cep1,cep2,cep3,cep4));
+		
+		Cliente cli1 = new Cliente(null,"Antonio Aguiar","antonio@gmail","64043827687",TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("34999420919","34991050124"));
+		
+		Endereco ender1 = new Endereco(null,341,"CASA",cli1,cep3);
+		Endereco ender2 = new Endereco(null,256,"BABA",cli1,cep1);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(ender1,ender2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(ender1,ender2));
 		
 	}
 

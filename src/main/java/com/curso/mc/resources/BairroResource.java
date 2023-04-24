@@ -2,6 +2,7 @@ package com.curso.mc.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.curso.mc.domain.Bairro;
 import com.curso.mc.domain.input.BairroInput;
+import com.curso.mc.domain.output.BairroOutput;
 import com.curso.mc.services.BairroService;
 import com.curso.mc.repositories.BairroRepository;
 
@@ -27,10 +29,18 @@ public class BairroResource {
 	@Autowired BairroService bairroService;
 	@Autowired private BairroRepository bairroRepository;
 	
+//	@GetMapping
+//	public ResponseEntity<List<Bairro>> findAll(){
+//		List<Bairro> listBairro = bairroService.findAll();
+//		return ResponseEntity.ok().body(listBairro);
+//	}
+	
 	@GetMapping
-	public ResponseEntity<List<Bairro>> findAll(){
-		List<Bairro> listBairro = bairroService.findAll();
-		return ResponseEntity.ok().body(listBairro);
+	public ResponseEntity<List<BairroOutput>> findAll(){
+		List<Bairro> listBairro = bairroRepository.findAll();
+		List<BairroOutput> bairroOut = listBairro.stream().map(obj -> new BairroOutput(obj)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(bairroOut);
 	}
 	
 	@GetMapping(value = "/{id}")
