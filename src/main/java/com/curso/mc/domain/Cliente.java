@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 
 import com.curso.mc.domain.enums.TipoCliente;
 import com.curso.mc.domain.input.Endereco;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import lombok.Data;
@@ -36,12 +37,16 @@ public class Cliente implements Serializable{
 	@NotNull
 	private Integer tipoCliente;
 	
+	//@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente () {}
 

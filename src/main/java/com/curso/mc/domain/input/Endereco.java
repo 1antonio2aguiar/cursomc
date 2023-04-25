@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 
 import com.curso.mc.domain.Cep;
 import com.curso.mc.domain.Cliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -29,6 +31,8 @@ public class Endereco implements Serializable{
 	@JoinColumn(name = "cep_id")
 	private Cep cep;
 	
+	//@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
