@@ -49,6 +49,7 @@ public class EstadoService {
 		return estadoRepository.save(estadoSalva);
 	}
 	
+	@Transactional
 	public void delete(Integer id) {
 		try {
 			estadoRepository.deleteById(id);

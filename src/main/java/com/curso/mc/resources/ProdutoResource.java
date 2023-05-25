@@ -15,51 +15,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.curso.mc.domain.Categoria;
-import com.curso.mc.domain.Cliente;
-import com.curso.mc.domain.input.CategoriaInput;
-import com.curso.mc.domain.input.ClienteInput;
-import com.curso.mc.services.CategoriaService;
+import com.curso.mc.domain.Estado;
+import com.curso.mc.domain.Produto;
+import com.curso.mc.services.ProdutoService;
 
 @RestController
-@RequestMapping(value="/categorias")
-public class CategoriaResource {
-	@Autowired CategoriaService categoriaService;
+@RequestMapping(value="/produtos")
+public class ProdutoResource {
+	@Autowired ProdutoService produtoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> findAll(){
-		List<Categoria> listCategoria = categoriaService.findAll();
-		return ResponseEntity.ok().body(listCategoria);
+	public ResponseEntity<List<Produto>> findAll(){
+		List<Produto> listProduto = produtoService.findAll();
+		return ResponseEntity.ok().body(listProduto);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Categoria> findById(@PathVariable Integer id){
-		Categoria categoria = categoriaService.findById(id);
-		return ResponseEntity.ok().body(categoria);
+	public ResponseEntity<Produto> findById(@PathVariable Integer id){
+		Produto produto = produtoService.findById(id);
+		return ResponseEntity.ok().body(produto);
 	}
 	
 	// INSERIR
 	@PostMapping
-	public ResponseEntity<Categoria> insert(@RequestBody CategoriaInput categoriaInput){
-		Categoria categoriaSalva = categoriaService.insert(categoriaInput);
+	public ResponseEntity<Produto> insert(@RequestBody Produto produto){
+		produto = produtoService.insert(produto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(categoriaSalva.getId()).toUri();
-		return ResponseEntity.created(uri).body(categoriaSalva);
+				.buildAndExpand(produto.getId()).toUri();
+		return ResponseEntity.created(uri).body(produto);
 	}
 	
 	// ALTERAR
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Categoria> update(@PathVariable Integer id, @RequestBody CategoriaInput categoriaInput){
-		Categoria categoriaSalva = categoriaService.update(id, categoriaInput);
-		return ResponseEntity.ok().body(categoriaSalva);
+	public ResponseEntity<Produto> update(@PathVariable Integer id, @RequestBody Produto produto){
+		produto = produtoService.update(id, produto);
+		return ResponseEntity.ok().body(produto);
 	}
 	
 	// DELETAR
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Categoria> delete(@PathVariable Integer id){
-		categoriaService.delete(id);
+	public ResponseEntity<Produto> delete(@PathVariable Integer id){
+		produtoService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
 	
 	/*@RequestMapping(method = RequestMethod.GET)
 	public List<Categoria> listar() {

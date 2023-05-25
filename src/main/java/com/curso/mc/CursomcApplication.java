@@ -144,18 +144,18 @@ public class CursomcApplication implements CommandLineRunner{
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamnetoRepository.saveAll(Arrays.asList(pagt1,pagt2));
 		
-		ItemPedido iped1 = new ItemPedido(ped1,p2,0.00,1,1753.1);
-		ItemPedido iped2 = new ItemPedido(ped1,p3,0.00,2,53.86);
-		ItemPedido iped3 = new ItemPedido(ped2,p4,10.00,1,138.25);
+		ItemPedido ip1 = new ItemPedido(ped1,p2,0.25,1,1753.1);
+		ItemPedido ip2 = new ItemPedido(ped1,p3,0.80,2,53.86);
+		ItemPedido ip3 = new ItemPedido(ped2,p4,10.00,1,138.25);
+
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
 		
-		//ped1.getItens().addAll(Arrays.asList(iped1,iped2));
-		//ped2.getItens().addAll(Arrays.asList(iped3));
+		p2.getItens().addAll(Arrays.asList(ip1));
+		p3.getItens().addAll(Arrays.asList(ip3));
+		p4.getItens().addAll(Arrays.asList(ip2));
 		
-		p2.getItens().addAll(Arrays.asList(iped1));
-		p3.getItens().addAll(Arrays.asList(iped3));
-		p4.getItens().addAll(Arrays.asList(iped2));
-		
-		itemPedidoRepository.saveAll(Arrays.asList(iped1,iped2,iped3));
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 	}
 
 	

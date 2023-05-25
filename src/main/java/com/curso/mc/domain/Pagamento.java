@@ -3,8 +3,6 @@ package com.curso.mc.domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -13,7 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.curso.mc.domain.enums.EstadoPagamento;
-import com.curso.mc.domain.input.Endereco;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +28,7 @@ public abstract class Pagamento  implements Serializable{
 	
 	private Integer estdoPagamento;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId

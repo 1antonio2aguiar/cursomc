@@ -34,7 +34,6 @@ public class Produto implements Serializable{
 	private String nome;
 	private double preco;
 	
-	//@JsonBackReference -- funciona como o JsonIgnore
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "produto_categoria",
@@ -42,11 +41,13 @@ public class Produto implements Serializable{
 	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<>(); /* Set<> nao deixa repetir itens do pedido */
 	
 	public Produto() {}
 	
+	@JsonIgnore
 	public List<Pedido> getPedidos(){
 		List<Pedido> list = new ArrayList<>();
 		for(ItemPedido ip: itens) {

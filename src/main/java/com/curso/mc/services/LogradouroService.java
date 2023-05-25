@@ -67,6 +67,7 @@ public class LogradouroService {
 		return logradouroRepository.save(logradouroSalva);
 	}
 	
+	
 	public void delete(Integer id) {
 		try {
 			logradouroRepository.deleteById(id);
